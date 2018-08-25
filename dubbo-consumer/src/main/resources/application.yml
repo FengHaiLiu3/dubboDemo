@@ -1,0 +1,31 @@
+# 在这里编写springboot的配置信息
+server:
+  port: 8080
+  context-path: /
+  application:
+    name: dubbo-consumer-demo
+
+management:
+  port: 8081
+
+
+# Dubbo Config properties
+## ApplicationConfig Bean
+dubbo:
+  application:
+    id: dubbo-consumer
+    name: dubbo-consumer
+  ## ProtocolConfig Bean
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 12345
+  ## RegistryConfig Bean
+  registry:
+    id: my-registry
+    address: zookeeper://127.0.0.1:2181
+
+    ## mybatis
+    mybatis:
+      mapper-locations: classpath*:mapper/*.xml  #mapper映射xml文件的所在路径
+      type-aliases-package: com.demo.entity  # 实体类的路径
