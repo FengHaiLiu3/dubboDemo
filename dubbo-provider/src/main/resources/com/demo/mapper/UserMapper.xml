@@ -10,7 +10,7 @@
     <sql id="Base_Column_List">
       user_id, user_name, gender, phone
     </sql>
-    <select id="selectByUserId" resultMap="BaseResultMapper" parameterType="Integer">
+    <select id="selectByUserId" resultMap="BaseResultMapper" parameterType="Long">
         select
         <include refid="Base_Column_List" />
         from user

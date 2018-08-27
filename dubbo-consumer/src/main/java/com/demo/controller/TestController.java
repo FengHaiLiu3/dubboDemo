@@ -18,9 +18,21 @@ public class TestController {
     @Resource
     private UserService userService;
 
+
     @GetMapping("getUser")
     public User getUserById() {
-        return userService.getUserById(1);
+        return userService.getUserById(1L);
+    }
+
+    @GetMapping("sendMsg")
+    public String sendMsg() {
+        return userService.sendMsg(1L);
+    }
+
+    @GetMapping("validCode")
+    public boolean validCode() {
+        Long userId = 1L;
+        return userService.validCode(userId);
     }
 
 }

@@ -9,6 +9,6 @@
 
     <dubbo:application name="consumer"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
-    <dubbo:annotation package="com.demo.demo"/>
+    <dubbo:annotation package="com.demo.service"/>
     <dubbo:reference interface="com.demo.service.UserService" id="userService" check="false" timeout="10000"/>
 </beans>

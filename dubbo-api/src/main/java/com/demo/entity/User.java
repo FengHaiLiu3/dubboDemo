@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 @Data
 public class User implements Serializable {
-    private Integer userId;
+    private Long userId;
     private String userName;
     private String gender;
-    private Integer phone;
+    private String phone;
 }
