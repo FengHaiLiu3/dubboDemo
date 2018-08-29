@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @EnableCaching
 @Service("userService")
@@ -35,7 +36,10 @@ public class UserSericeImpl implements UserService {
         User user = this.userMapper.selectByUserId(userId);
         if (null != user) {
             //TO-DO 调用短信借口发送短信
-            return RandomUtil.randomCode();
+            String code = RandomUtil.randomCode();
+            String key = Long.toString(userId);
+            stringRedisTemplate.opsForValue().set(key, code, 60 * 10, TimeUnit.SECONDS);
+            return code;
 
         }
         return "无此用户";
@@ -43,10 +47,10 @@ public class UserSericeImpl implements UserService {
 
     @Transactional
     @Override
-    public boolean validCode(Long userId) {
-        String code = sendMsg(userId);
+    public boolean validCode(Long userId, String code) {
+        sendMsg(userId);
         String key = Long.toString(userId);
-        stringRedisTemplate.opsForValue().set(key, code);
+
         // do something
         return stringRedisTemplate.opsForValue().get(key).equals(code);
 
